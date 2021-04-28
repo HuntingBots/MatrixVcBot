@@ -40,7 +40,7 @@ I'm here for Entertain you.
                     ),
                     InlineKeyboardButton(
                         "🔗 Source code", url="https://github.com/HuntingBots/MatrixVcBot"
-                    )
+                    ),
                 ],
                 [
                     InlineKeyboardButton(
