@@ -9,7 +9,7 @@
 <a href="https://t.me/helpcenterbot1" alt="Support Group!"> <img src="https://aleen42.github.io/badges/src/telegram.svg" /> </a>
 
 ### Bot And Channel 
-* Bot Link:  <a href="http://t.me/Matrix_Vcbot" alt="Bot Link"> <img src="https://img.shields.io/badge/%F0%9F%A4%96%20-princessAsunaRobot-blue" /> </a>
+* Bot Link:  <a href="http://t.me/Matrix_Vcbot" alt="Bot Link"> <img src="https://img.shields.io/badge/%F0%9F%A4%96%20-meOnTelegram-blue" /> </a>
 * Support Channel: <a  href="https://t.me/helpcenterbotloges" alt="Help Center Loges"> <img  src="https://img.shields.io/badge/%F0%9F%92%A1-princessAsunaRobot%20Log%20Channel-9cf" /> </a>
 
 # How To Host
