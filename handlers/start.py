@@ -22,7 +22,7 @@ I'm here for Entertain you.
             [
                 [
                     InlineKeyboardButton(
-                        "🤴My Master", url="https://t.me/The_Ghosht_Hunter",
+                        "🤴My Master", url="https://t.me/The_Ghost_Hunter",
                     )
                 ],
                 [
