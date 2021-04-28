@@ -35,7 +35,7 @@ I'm here for Entertain you.
                     ),
                     InlineKeyboardButton(
                         "📚 Loges", url="https://t.me/helpcenterbotloges"
-                    )
+                    ),
                 ],
                 [
                 
