@@ -1,9 +1,9 @@
 {
-    "name": "✯𝗩𝗖𝗣𝗹𝗮𝘆𝗕𝗼𝘁✯",
-    "logo": "https://telegra.ph/file/7ffa8d18b9b7f1b51a81e.jpg",
+    "name": "💞MatrixVcBot💞",
+    "logo": "https://telegra.ph/file/73d737b83d58322eda419.jpg",
     "description": "Open-Source bot to play songs in your Telegram's Group Voice Chat. Powered by PyTgCalls.",
     "keywords": ["music", "voicechat", "telegram"],
-    "repository": "https://github.com/QueenArzoo/VCPlayBot",
+    "repository": "https://github.com/HuntingBots/MatrixVcBot",
     "stack": "container",
     "env": {
         "SESSION_NAME": {
@@ -15,7 +15,7 @@
             "required": true
         },
         "BOT_NAME": {
-            "description": "Your VCPlayBot Name.",
+            "description": "Your VC Play by Matrix VC Bot Name.",
             "required": false,
             "value": ""
        },
