@@ -9,7 +9,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
     & ~ filters.edited
 )
 async def start_(client: Client, message: Message):
-    await message.reply_sticker,
+    await message.reply_sticker
     await message.reply_text(
         f"""<b>Hi {message.from_user.first_name}!
 \nI Hello I'm Matrix VC Bot I can play music in your group's voice chat [🎵](https://telegra.ph/file/73d737b83d58322eda419.jpg") 
