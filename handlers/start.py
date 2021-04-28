@@ -12,9 +12,9 @@ async def start_(client: Client, message: Message):
     await message.reply_sticker("CAACAgUAAxkBAAIp9mBtwBBZGywWEmV-WC8gcMArjusuAAKMAgACTp1xV6m-mtC1YTfoHgQ")
     await message.reply_text(
         f"""<b>Hi {message.from_user.first_name}!
-\nI can play music in your group's voice chat
-Maintained by @HEROGAMERS1 ❤
-\nTo add in your group contact us at @LaylaSupport.
+\nI Hello I'm Matrixvcplayer I can play music in your group's voice chat
+I'm here for Entertain you.
+\nTo add in your group please contact my master at [HELP CENTER](https://t.me/helpcenterbot1).
 \nHit /help list of available commands.
  </b>""",
       
@@ -23,23 +23,23 @@ Maintained by @HEROGAMERS1 ❤
             [
                 [
                     InlineKeyboardButton(
-                        "🌍 Music World", url="https://t.me/GIRLS_AND_BOYS_CHATTING",
+                        "🎼 Matrixvcmusic", url="https://t.me/helpcenterbot1",
                     )
                 ],
                 [
                     InlineKeyboardButton(
-                        "💬 Group", url="https://t.me/LaylaSupport"
+                        "💬 Group", url="https://t.me/snow_white_support"
                     ),
                     InlineKeyboardButton(
-                        "🔊 Channel", url="https://t.me/LaylaList"
+                        "🔊 Channel", url="https://t.me/robot_snow_white"
                     ),
                     InlineKeyboardButton(
-                        "💾 Source code", url="https://github.com/QueenArzoo/VCPlayBot"
+                        "🔗 Source code", url="PikachuVcPlayBot"
                     )
                 ],
                 [
                     InlineKeyboardButton(
-                        "➕ Add To Your Group ➕", url="https://t.me/VCPlayBotBot?startgroup=true"
+                        "➕ Add To Your Group ➕", url=""PikachuVcPlayBot"
                     ) 
                 ]
             ]
@@ -53,12 +53,12 @@ Maintained by @HEROGAMERS1 ❤
 )
 async def start(client: Client, message: Message):
     await message.reply_text(
-        "💁🏻‍♂️ Do you want to search for a YouTube video?",
+        "🔍 Do you want to search for a YouTube video?",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "🔊 Channel", url="https://t.me/LaylaList"
+                        "🔊 Channel", url="https://t.me/robot_snow_white"
                     )
                 ],    
                 [    
@@ -104,7 +104,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "🔊 Channel", url="https://t.me/LaylaList"
+                        "🔊 Channel", url="https://t.me/robot_snow_white"
                     )
                 ]
             ]
