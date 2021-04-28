@@ -4,7 +4,7 @@ The easiest way to deploy this Bot
 
 Get STRING_NAME from here:
 
-[![GenerateString](https://img.shields.io/badge/repl.it-generateString-yellored)](https://replit.com/@HuntingBots/Matrixvcbot)
+[![GenerateString](https://img.shields.io/badge/repl.it-generateString-yellowblue)](https://replit.com/@HuntingBots/Matrixvcbot)
 
 ### Mandatory Vars.
 
