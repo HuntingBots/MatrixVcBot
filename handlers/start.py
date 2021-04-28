@@ -34,12 +34,13 @@ I'm here for Entertain you.
                         "🔊 Channel", url="https://t.me/robot_snow_white"
                     ),
                     InlineKeyboardButton(
-                        "🔗 Source code", url="PikachuVcPlayBot"
+                        "🔗 Source code", url="https://github.com/HuntingBots/MatrixVcBot"
                     )
                 ],
                 [
                     InlineKeyboardButton(
-                        "➕ Add To Your Group ➕", url=""PikachuVcPlayBot"
+                      
+                        "➕ Add To Your Group ➕", url="http://t.me/Matrix_Vcbot?startgroup=true"
                     ) 
                 ]
             ]
