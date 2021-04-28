@@ -23,10 +23,7 @@ I'm here for Entertain you.
             [
                 [
                     InlineKeyboardButton(
-                        "🤴 Owner", url="https://t.me/The_Ghosht_Hunter" 
-
-
-",
+                        "🤴My Master", url="https://t.me/The_Ghosht_Hunter",
                     )
                 ],
                 [
@@ -34,24 +31,21 @@ I'm here for Entertain you.
                         "💬 Group", url="https://t.me/helpcenterbot1"
                     ),
                     InlineKeyboardButton(
-                     
-                ],
-                [   "🔊 My Channel", url="https://t.me/fire_world_entertainment"
+                        "🔊 My Channel", url="https://t.me/fire_world_entertainment"
                     ),
-                    InlineKeyboardButton(
-                        "🔗 Source code", url="https://github.com/HuntingBots/MatrixVcBot"
-                    ),
-                ],
-                [
                     InlineKeyboardButton(
                         "📚 Loges", url="https://t.me/helpcenterbotloges"
                     )
-
-                   ],
-                   [
+                ],
+                [
+                
                     InlineKeyboardButton(
-                      
-                        "➕ Add To Your Group ➕", url="http://t.me/Matrix_Vcbot?startgroup=true"
+                        "💾 Source code", url="https://github.com/HuntingBots/MatrixVcBot"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
+                        "➕ Add To Your Group ➕", url="https://t.me/Matrix_Vcbot?startgroup=true"
                     ) 
                 ]
             ]
