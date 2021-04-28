@@ -2,7 +2,7 @@
   <img src="https://telegra.ph/file/73d737b83d58322eda419.jpg">
 </p>
 
-# Matrix VcBot 
+# Matrix VC Bot 
 
 # How To Host
 The easiest way to deploy this Bot
