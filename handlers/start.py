@@ -13,7 +13,7 @@ async def start_(client: Client, message: Message):
         f"""<b>Hi {message.from_user.first_name}!
 \nI Hello I'm Matrix VC Bot I can play music in your group's voice chat [🎵](https://telegra.ph/file/73d737b83d58322eda419.jpg") 
 I'm here for Entertain you.
-\nTo add in your group please contact my master at Support Group.
+\nTo add me in your group please contact my master at Support Group.
 \nHit /help list of available commands.
  </b>""",
       
