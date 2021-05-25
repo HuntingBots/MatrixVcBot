@@ -61,7 +61,7 @@ def song(client, message):
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = '**🎵 Uploaded by @Matrix_Vcbot **'
+        rep = '**🎵 Uploaded by @VCPlayBot **'
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
@@ -78,8 +78,8 @@ def song(client, message):
     except Exception as e:
         print(e)
 
-ARQ_API = "LLFZVU-TJACRF-UJPHLE-EQDFBB-ARQ"
-
+ARQ_API = "http://35.240.133.234:8000"
+arq = ARQ(ARQ_API)
 
 
 def get_text(message: Message) -> [None, str]:
