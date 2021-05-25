@@ -79,7 +79,7 @@ def song(client, message):
         print(e)
 
 ARQ_API = "http://35.240.133.234:8000"
-arq = ARQ(EMCYCP-HTNVLX-VTNIJT-EJGRGV-ARQ)
+arq = EMCYCP-HTNVLX-VTNIJT-EJGRGV-ARQ
 
 
 def get_text(message: Message) -> [None, str]:
