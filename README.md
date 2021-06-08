@@ -1,43 +1,39 @@
-<p align="center">
-  <img src="https://telegra.ph/file/73d737b83d58322eda419.jpg">
-</p>
+<h1 align="centre">Asuna Music Bot-V3.5 🎶</h1>
 
-### Matrix VC Bot
+### A bot that can play music on telegram group's voice call
 
 ### Telegram Group
 <p align="left">
-<a href="https://t.me/helpcenterbot1" alt="Support Group!"> <img src="https://aleen42.github.io/badges/src/telegram.svg" /> </a>
+<a href="https://t.me/AsunaRobotSupport" alt="Telegram!"> <img src="https://aleen42.github.io/badges/src/telegram.svg" /> </a>
 
 ### Bot And Channel 
-* Bot Link:  <a href="http://t.me/Matrix_Vcbot" alt="Bot Link"> <img src="https://img.shields.io/badge/%F0%9F%A4%96%20-meOnTelegram-blue" /> </a>
-* Support Channel: <a  href="https://t.me/helpcenterbotloges" alt="Help Center Loges"> <img  src="https://img.shields.io/badge/%F0%9F%92%A1-princessAsunaRobot%20Log%20Channel-9cf" /> </a>
-
-# How To Host
-The easiest way to deploy this Bot
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/HuntingBots/MatrixVcBot"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
-
-Get STRING_NAME from here:
-
-[![GenerateString](https://img.shields.io/badge/repl.it-generateString-yelloblue)](https://replit.com/@HuntingBots/Matrixvcbot)
-
-### Mandatory Vars.
-
-- Some Of The Mandatory Vars Are :-
-   - `API_ID` :  Give API_ID of your Alternate Telegram Account. also get from here [@APIInfoBot](https://t.me/APIinfoBot)
-   - `API_HASH` :  Give API_HASH of your Alternate Telegram Account. also get from here [@APIInfoBot](https://t.me/APIinfoBot)
-   - `STRING_NAME` :  Make a string session from [here](https://replit.com/@QueenArzoo/VCPlayBot)
-   - `BOT_TOKEN` :  Make a Bot from [@Botfather](https://t.me/botfather) and fill it's bot token.
-   - `SUDO_USERS` :  Fill Userid of yhe users whom you want to be able to control the bot. You can add multiple id by giving a space in b/w each id.
+* Available On :  <a href="http://t.me/My_Asuna_Robot" alt="AsunaRobot"> <img src="https://img.shields.io/badge/%F0%9F%A4%96%20-Asuna_Robot-blue" /> </a>
+* Support Channel: <a  href="https://t.me/AsunaLogUpdate" alt="Help Centre Logs"> <img  src="https://img.shields.io/badge/%F0%9F%92%A1-AsunaRobot%20Log%20Channel-9cf" /> </a>
 
 
+<p align="center">
+  <img src="https://telegra.ph/file/a3b7de7254411cbe33735.jpg">
+</p>
+
+<h2> Whats new 🔥 </h2>
+
+- Thumbnail Support
+- Playlist Support
+- Current playback support
+- Showing track names when skipping
+- Zero downtime, Fully Stable
+- DEEZER,YOUTUBE & SAAVN PLAYBACK SUPPORTED
+- Settings panel
+- Control with buttons
+- Userbot auto join
+- Cahnnel Music Play
 
 
-
-
-
-## Commands 🛠
+### Commands 🛠
+#### For all in group
 
 - `/play <song name>` - play song you requested
+- `/play <reply to audio>` - play replied file
 - `/dplay <song name>` - play song you requested via deezer
 - `/splay <song name>` - play song you requested via jio saavn
 - `/playlist` - Show now playing list
@@ -58,41 +54,29 @@ Get STRING_NAME from here:
 - `/userbotleave` - remove assistant from your chat
 - `/admincache` - Refresh admin list
 
-## Requirements
+#### Channel Music Play.
+You can set Channel Music Play like this:
+ 1. Get your channel ID.
+ 2. Rename your group to: Channel Music: your_channel_id
+ 3. Add @My_Asuna_Robot as Channel admin with full perms
+ 4. Send /userbotjoin in Channel
+ 5. Simply send commands in your group.
 
-- FFmpeg
-- Python 3.7+
 
-## Deployment
+# How To Host
+The easiest way to deploy this Bot
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/HuntingBots/AsunaMusic"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blue?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
 
-### Config
+Get STRING_NAME from here:
 
-Copy `example.env` to `.env` and fill it with your credentials.
+[![GenerateString](https://img.shields.io/badge/repl.it-generateString-silver)](https://replit.com/@HuntingBots/Matrixvcbot)
 
-### The good way
 
-1. Install Python requirements:
-   ```bash
-   pip install -U -r requirements.txt
-   ```
-2. Run:
-   ```bash
-   python main.py
-   ```
+## Our Telegram Channel and Group
 
-### Docker
+* [Support](https://telegram.dog/AsunaRobotSupport)
+* [Discussion](https://telegram.dog/helpcentrebot1)
+* [Second Group](https://telegram.dog/fire_world_entertainment)
 
-1. Build:
-   ```bash
-   docker build -t musicplayer .
-   ```
-2. Run:
-   ```bash
-   docker run --env-file .env musicplayer
-   ```
-
-## License
-
-### GNU Affero General Public License v3.0
-
-[Read more](http://www.gnu.org/licenses/#AGPL)
+## Credits, and Thanks to 
+*   [The Ghost Hunter](https://telegram.dog/The_Ghost_Hunter)

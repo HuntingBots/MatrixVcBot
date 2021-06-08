@@ -1,9 +1,9 @@
 {
-    "name": "💞MatrixVcBot💞",
-    "logo": "https://telegra.ph/file/73d737b83d58322eda419.jpg",
-    "description": "Open-Source bot to play songs in your Telegram's Group Voice Chat. Powered by PyTgCalls.",
+    "name": "Asuna Music",
+    "logo": "https://telegra.ph/file/8f77039e12f5242ddd07c.jpg",
+    "description": "Open-Source bot to play songs in your Telegram's Group Voice Chat. Powered by [Asuna Robot](https://t.me/My_Asuna_Robot).",
     "keywords": ["music", "voicechat", "telegram"],
-    "repository": "https://github.com/HuntingBots/MatrixVcBot",
+    "repository": "https://github.com/HuntingBots/AsunaMusic",
     "stack": "container",
     "env": {
         "SESSION_NAME": {
@@ -17,7 +17,7 @@
         "BOT_NAME": {
             "description": "Your VC Play by Matrix VC Bot Name.",
             "required": false,
-            "value": ""
+            "value": "@asunahelper"
        },
         "API_ID": {
             "description": "From my.telegram.org/apps",
