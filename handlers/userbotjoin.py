@@ -1,10 +1,21 @@
-from callsmusic.callsmusic import client as USER
-from pyrogram import Client, filters
-from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
-from pyrogram.errors import UserAlreadyParticipant
-from helpers.decorators import errors, authorized_users_only
 
-@Client.on_message(filters.group & filters.command(["userbotjoin"]))
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+from pyrogram import Client, filters
+from pyrogram.errors import UserAlreadyParticipant
+
+from AsunaMusic.helpers.decorators import authorized_users_only, errors
+from AsunaMusic.services.callsmusic.callsmusic import client as USER
+
+
+@Client.on_message(filters.command(["userbotjoin"]) & ~filters.private & ~filters.bot)
 @authorized_users_only
 @errors
 async def addchannel(client, message):
@@ -20,34 +31,79 @@ async def addchannel(client, message):
     try:
         user = await USER.get_me()
     except:
-        user.first_name =  "matrixtrixvcbot"
+        user.first_name = "AsunaMusic"
 
     try:
         await USER.join_chat(invitelink)
-        await USER.send_message(message.chat.id,"I joined here as you requested")
+        await USER.send_message(message.chat.id, "I joined here as you requested")
     except UserAlreadyParticipant:
         await message.reply_text(
-            "<b>@matrixvcbot already in your chat</b>",
+            "<b>helper already in your chat</b>",
         )
-        pass
     except Exception as e:
         print(e)
         await message.reply_text(
             f"<b>🛑 Flood Wait Error 🛑 \n User {user.first_name} couldn't join your group due to heavy join requests for userbot! Make sure user is not banned in group."
-            "\n\nOr manually add @matrixvcbot to your Group and try again</b>",
+            "\n\nOr manually add @asunahelper to your Group and try again</b>",
         )
         return
     await message.reply_text(
-            "<b>@matrixvcbot userbot joined your chat</b>",
-        )
-    
+        "<b>helper userbot joined your chat</b>",
+    )
+
+
 @USER.on_message(filters.group & filters.command(["userbotleave"]))
 async def rem(USER, message):
     try:
         await USER.leave_chat(message.chat.id)
-    except:  
+    except:
         await message.reply_text(
             f"<b>User couldn't leave your group! May be floodwaits."
             "\n\nOr manually kick me from to your Group</b>",
         )
         return
+
+@Client.on_message(filters.command(["userbotjoinchannel","ubjoinc"]) & ~filters.private & ~filters.bot)
+@authorized_users_only
+@errors
+async def addcchannel(client, message):
+    try:
+      conchat = await client.get_chat(message.chat.id)
+      conid = conchat.linked_chat.id
+      chid = conid
+    except:
+      await message.reply("Is chat even linked")
+      return    
+    chat_id = chid
+    try:
+        invitelink = await client.export_chat_invite_link(chid)
+    except:
+        await message.reply_text(
+            "<b>Add me as admin of yor channel first</b>",
+        )
+        return
+
+    try:
+        user = await USER.get_me()
+    except:
+        user.first_name = "AsunaMusic"
+
+    try:
+        await USER.join_chat(invitelink)
+        await USER.send_message(message.chat.id, "I joined here as you requested")
+    except UserAlreadyParticipant:
+        await message.reply_text(
+            "<b>helper already in your channel</b>",
+        )
+        return
+    except Exception as e:
+        print(e)
+        await message.reply_text(
+            f"<b>🛑 Flood Wait Error 🛑 \n User {user.first_name} couldn't join your channel due to heavy join requests for userbot! Make sure user is not banned in channel."
+            "\n\nOr manually add @asunahelper to your Group and try again</b>",
+        )
+        return
+    await message.reply_text(
+        "<b>helper userbot joined your channel</b>",
+    )
+    
