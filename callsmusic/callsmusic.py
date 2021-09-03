@@ -1,8 +1,8 @@
 from pyrogram import Client
 from pytgcalls import PyTgCalls
 
-from AsunaMusic.config import API_HASH, API_ID, SESSION_NAME
-from AsunaMusic.services.callsmusic import queues
+import config
+from . import queues
 
 client = Client(SESSION_NAME, API_ID, API_HASH)
 pytgcalls = PyTgCalls(client)
