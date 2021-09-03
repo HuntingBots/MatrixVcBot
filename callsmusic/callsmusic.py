@@ -1,10 +1,10 @@
 from pyrogram import Client
 from pytgcalls import PyTgCalls
 
-import config
-from . import queues
+from AsunaMusic.config import API_HASH, API_ID, SESSION_NAME
+from AsunaMusic.services.callsmusic import queues
 
-client = Client(config.SESSION_NAME, config.API_ID, config.API_HASH)
+client = Client(SESSION_NAME, API_ID, API_HASH)
 pytgcalls = PyTgCalls(client)
 
 
@@ -15,9 +15,7 @@ def on_stream_end(chat_id: int) -> None:
     if queues.is_empty(chat_id):
         pytgcalls.leave_group_call(chat_id)
     else:
-        pytgcalls.change_stream(
-            chat_id, queues.get(chat_id)["file"]
-        )
+        pytgcalls.change_stream(chat_id, queues.get(chat_id)["file"])
 
 
 run = pytgcalls.run
