@@ -50,7 +50,7 @@ I'm here to entertain you.
                         "💬 Group", url="https://t.me/helpcenterbot1"
                     ),
                     InlineKeyboardButton(
-                        "🔊 My Channel", url="https://t.me/fire_world_entertainment"
+                        "🔊 My Channel", url="https://t.me/fire_world_entertainment6"
                     ),
                     InlineKeyboardButton(
                         "📚 Logs", url="https://t.me/helpcenterbotloges"
@@ -131,7 +131,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "🔊 Channel", url="https://t.me/fire_world_entertainment"
+                        "🔊 Channel", url="https://t.me/fire_world_entertainment5"
                     )
                 ]
             ]
