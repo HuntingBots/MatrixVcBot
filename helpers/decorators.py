@@ -1,21 +1,28 @@
-# Calls Music 1 - Telegram bot for streaming audio in group calls
-# Copyright (C) 2021  Roj Serbest
+"""
+MIT License
 
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU Affero General Public License as
-# published by the Free Software Foundation, either version 3 of the
-# License, or (at your option) any later version.
+Copyright (c) 19-10-2026 @HuntingBots for MatrixVcBot
 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Affero General Public License for more details.
-#
-# You should have received a copy of the GNU Affero General Public License
-# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+"""
 from typing import Callable
+from functools import wraps
 
 from pyrogram import Client
 from pyrogram.types import Message
@@ -25,9 +32,10 @@ from config import SUDO_USERS
 
 
 def errors(func: Callable) -> Callable:
-    async def decorator(client: Client, message: Message):
+    @wraps(func)
+    async def decorator(client: Client, message: Message, *args, **kwargs):
         try:
-            return await func(client, message)
+            return await func(client, message, *args, **kwargs)
         except Exception as e:
             await message.reply(f"{type(e).__name__}: {e}")
 
@@ -35,14 +43,17 @@ def errors(func: Callable) -> Callable:
 
 
 def authorized_users_only(func: Callable) -> Callable:
-    async def decorator(client: Client, message: Message):
-        if message.from_user.id in SUDO_USERS:
-            return await func(client, message)
+    @wraps(func)
+    async def decorator(client: Client, message: Message, *args, **kwargs):
+        if message.from_user:
+            user_id = message.from_user.id
+            if user_id in SUDO_USERS:
+                return await func(client, message, *args, **kwargs)
 
-        administrators = await get_administrators(message.chat)
-
-        for administrator in administrators:
-            if administrator == message.from_user.id:
-                return await func(client, message)
+            administrators = await get_administrators(message.chat)
+            if user_id in administrators:
+                return await func(client, message, *args, **kwargs)
+        elif message.sender_chat and message.sender_chat.id == message.chat.id:
+            return await func(client, message, *args, **kwargs)
 
     return decorator
