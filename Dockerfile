@@ -4,6 +4,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
     git \
     curl \
+    gcc \
+    python3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -13,5 +15,7 @@ RUN pip install --no-cache-dir -U pip setuptools wheel && \
     pip install --no-cache-dir -r requirements.txt
 
 COPY . /app
+
+ENV PYTHONUNBUFFERED=1
 
 CMD ["python3", "main.py"]

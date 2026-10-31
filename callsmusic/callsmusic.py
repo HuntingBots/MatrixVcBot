@@ -24,6 +24,16 @@ SOFTWARE.
 import os
 import sqlite3
 import asyncio
+import pyrogram.errors
+
+if not hasattr(pyrogram.errors, "GroupcallForbidden"):
+    try:
+        class GroupcallForbidden(pyrogram.errors.Forbidden):
+            ID = "GROUPCALL_FORBIDDEN"
+        pyrogram.errors.GroupcallForbidden = GroupcallForbidden
+    except Exception:
+        pass
+
 from pyrogram import Client
 from pytgcalls import PyTgCalls, types
 import config
