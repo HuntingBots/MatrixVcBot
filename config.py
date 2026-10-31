@@ -33,18 +33,18 @@ admins = {}
 SESSION_NAME = getenv("SESSION_NAME", "BQA7eRMA1Uq8x1dD7hvbssh0fGChpsQlem8VjKNODL41Zg4a070b33ePuhsmx81qF4DLqRsibryUZy_cpJ34vu2z1id4w681972_Yu1_26MdBd8cK09zsYqIWWcV
 JdxsGP7xXjBJWjNJY5HOZM6UTVWTD86fq_bJJq0uAJv6Q8QvinClNdAj FV fwF2fLEMqpjJUeHPQaXU1IUH9h9 PwysXvf9ncC1dLD_7nwLULeQVQquqf8NfaPiSpi
 30LQyCCs IZQWWFML jmrJ1kna01gduhmNn_0Sley LIt fUdew4mD70_H1Xwqms 53Aovpy-NZKOrbQ19ZZIMjCUAGSOEfAr--FZvV-1EwAAAAIGqvkzAQ")
-BOT_TOKEN = getenv("BOT_TOKEN", "")
+BOT_TOKEN = getenv("BOT_TOKEN", "1791864202:AAF398tZYMvZKmNLIAv8eJdlo-TnqQHwVlE")
 BOT_NAME = getenv("BOT_NAME", "Matrix VC Bot")
 
-raw_api_id = getenv("API_ID", "")
+raw_api_id = getenv("API_ID", "3975570")
 API_ID = int(raw_api_id) if raw_api_id.strip().isdigit() else 0
 
-API_HASH = getenv("API_HASH", "")
+API_HASH = getenv("API_HASH", "680b62f2844aa1954216f6cb99d2f3d9")
 
 raw_limit = getenv("DURATION_LIMIT", "15")
 DURATION_LIMIT = int(raw_limit) if raw_limit.strip().isdigit() else 15
 
 COMMAND_PREFIXES = list(getenv("COMMAND_PREFIXES", "/ !").split())
 
-sudo_env = getenv("SUDO_USERS", "")
+sudo_env = getenv("SUDO_USERS", "1606221784")
 SUDO_USERS = [int(x) for x in sudo_env.split() if x.strip().isdigit()]
