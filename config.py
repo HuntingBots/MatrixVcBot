@@ -30,7 +30,9 @@ load_dotenv()
 que = {}
 admins = {}
 
-SESSION_NAME = getenv("SESSION_NAME", "session")
+SESSION_NAME = getenv("SESSION_NAME", "BQA7eRMA1Uq8x1dD7hvbssh0fGChpsQlem8VjKNODL41Zg4a070b33ePuhsmx81qF4DLqRsibryUZy_cpJ34vu2z1id4w681972_Yu1_26MdBd8cK09zsYqIWWcV
+JdxsGP7xXjBJWjNJY5HOZM6UTVWTD86fq_bJJq0uAJv6Q8QvinClNdAj FV fwF2fLEMqpjJUeHPQaXU1IUH9h9 PwysXvf9ncC1dLD_7nwLULeQVQquqf8NfaPiSpi
+30LQyCCs IZQWWFML jmrJ1kna01gduhmNn_0Sley LIt fUdew4mD70_H1Xwqms 53Aovpy-NZKOrbQ19ZZIMjCUAGSOEfAr--FZvV-1EwAAAAIGqvkzAQ")
 BOT_TOKEN = getenv("BOT_TOKEN", "")
 BOT_NAME = getenv("BOT_NAME", "Matrix VC Bot")
 
