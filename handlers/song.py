@@ -31,6 +31,7 @@ import requests
 from urllib.parse import quote_plus
 from yt_dlp import YoutubeDL
 from youtube_search import YoutubeSearch
+from downloaders.youtube import download as youtube_download
 
 from pyrogram import filters, Client
 from pyrogram.types import Message
@@ -100,18 +101,6 @@ async def song(client: Client, message: Message):
     query = " ".join(message.command[1:]).strip()
     m = await message.reply('🔎 Finding the song...')
 
-    os.makedirs("downloads", exist_ok=True)
-    ydl_opts = {
-        "format": "bestaudio/best",
-        "geo_bypass": True,
-        "nocheckcertificate": True,
-        "outtmpl": "downloads/%(id)s.%(ext)s",
-        "quiet": True,
-        "no_warnings": True,
-    }
-    if os.path.exists("cookies.txt"):
-        ydl_opts["cookiefile"] = "cookies.txt"
-
     thumb_file = None
     audio_file = None
     try:
@@ -136,9 +125,7 @@ async def song(client: Client, message: Message):
                 thumb_file = None
 
         await m.edit("⬇️ Downloading audio...")
-        with YoutubeDL(ydl_opts) as ydl:
-            info = ydl.extract_info(link, download=True)
-            audio_file = ydl.prepare_filename(info)
+        audio_file = youtube_download(link, format="mp3")
 
         dur = 0
         dur_arr = duration_str.split(':')
@@ -234,33 +221,44 @@ async def deezsong(client: Client, message: Message):
         track = tracks[0]
         title = track.get("title", query)
         artist = track.get("artist", {}).get("name", "Unknown Artist")
-        preview = track.get("preview")
+        duration = int(track.get("duration", 0))
+        album_cover = track.get("album", {}).get("cover_big") or track.get("album", {}).get("cover_medium")
 
-        if not preview:
-            await m.edit("❌ Download preview not available for this track.")
-            return
+        thumb_file = None
+        if album_cover:
+            thumb_file = f"downloads/thumb_deez_{int(time.time())}.jpg"
+            try:
+                r = requests.get(album_cover, timeout=10)
+                if r.status_code == 200:
+                    with open(thumb_file, "wb") as f:
+                        f.write(r.content)
+            except Exception:
+                thumb_file = None
 
-        await m.edit(f"⬇️ Downloading `{title}`...")
-        song_file = f"downloads/deez_{int(time.time())}.mp3"
-        os.makedirs("downloads", exist_ok=True)
-        async with aiohttp.ClientSession() as session:
-            async with session.get(preview) as resp:
-                if resp.status == 200:
-                    async with aiofiles.open(song_file, mode='wb') as f:
-                        await f.write(await resp.read())
+        await m.edit(f"⬇️ Downloading full song `{title}`...")
+        song_file = youtube_download(f"{title} {artist}", format="mp3")
 
         await m.edit("⬆️ Uploading...")
-        await message.reply_audio(audio=song_file, title=title, performer=artist)
+        caption = f"🎵 **{title}**\n👤 **Artist:** {artist}\nUploaded by Matrix VC Bot"
+        await message.reply_audio(
+            audio=song_file,
+            title=title,
+            performer=artist,
+            duration=duration,
+            thumb=thumb_file if (thumb_file and os.path.exists(thumb_file)) else None,
+            caption=caption
+        )
         await m.delete()
     except Exception as e:
         await m.edit(f"❌ Error: {e}")
     finally:
         is_downloading = False
-        if song_file and os.path.exists(song_file):
-            try:
-                os.remove(song_file)
-            except Exception:
-                pass
+        for f in (song_file, thumb_file):
+            if f and os.path.exists(f):
+                try:
+                    os.remove(f)
+                except Exception:
+                    pass
 
 
 @Client.on_message(filters.command(["vsong", "video"]))

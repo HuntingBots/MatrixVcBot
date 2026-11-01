@@ -28,6 +28,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 from urllib.parse import quote_plus
 import aiofiles
 import aiohttp
+import requests
 from yt_dlp import YoutubeDL
 
 try:
@@ -37,8 +38,6 @@ except ImportError:
 
 
 class TrackMetadata:
-    """Memory-optimized data holder using __slots__ to eliminate __dict__ memory overhead."""
-
     __slots__ = ("track_id", "title", "media_url")
 
     def __init__(self, track_id: str, title: str, media_url: Optional[str] = None):
@@ -65,7 +64,6 @@ class OptimizedWynkEngine:
     async def _fetch_search(
         self, session: aiohttp.ClientSession, query: str
     ) -> List[TrackMetadata]:
-        """Fetches search query asynchronously using pre-allocated connection pool."""
         url = "https://wynk.in/api/v1/search"
         params = {"q": query}
         headers = {
@@ -92,10 +90,8 @@ class OptimizedWynkEngine:
 
                     if not seen_contains(t_id):
                         seen_add(t_id)
-
                         title = " ".join(item.get("title", query).split())
                         media_url = item.get("media_url")
-
                         tracks.append(TrackMetadata(t_id, title, media_url))
 
                 return tracks
@@ -105,7 +101,6 @@ class OptimizedWynkEngine:
     async def _download_stream(
         self, session: aiohttp.ClientSession, track: TrackMetadata
     ) -> Optional[str]:
-        """Stream chunks directly to disk with non-blocking I/O (Prevents RAM spikes)."""
         if not track.media_url:
             return None
 
@@ -127,34 +122,31 @@ class OptimizedWynkEngine:
         return None
 
     async def get_track(self, query: str) -> Tuple[str, str]:
-        """High-level method: searches Wynk engine and streams the track with instant audio fallback."""
-        connector = aiohttp.TCPConnector(limit=10, ttl_dns_cache=300, enable_cleanup_closed=True)
-        async with aiohttp.ClientSession(connector=connector, json_serialize=json_parser.dumps) as session:
-            tracks = await self._fetch_search(session, query)
-            if tracks and tracks[0].media_url:
-                file_path = await self._download_stream(session, tracks[0])
-                if file_path and os.path.exists(file_path):
-                    return file_path, tracks[0].title
+        loop = asyncio.get_running_loop()
 
+        def _fetch_and_download():
+            track_title = query
+            clean_search = query
             try:
                 deezer_url = f"https://api.deezer.com/search?q={quote_plus(query)}"
-                async with session.get(deezer_url, timeout=aiohttp.ClientTimeout(total=5)) as d_resp:
-                    if d_resp.status == 200:
-                        d_data = await d_resp.json(content_type=None)
-                        d_tracks = d_data.get("data", [])
-                        if d_tracks and d_tracks[0].get("preview"):
-                            first = d_tracks[0]
-                            t_title = f"{first.get('title', query)} - {first.get('artist', {}).get('name', '')}".strip(" -")
-                            track_meta = TrackMetadata(f"wynk_{first['id']}", t_title, first["preview"])
-                            file_path = await self._download_stream(session, track_meta)
-                            if file_path and os.path.exists(file_path):
-                                return file_path, t_title
+                resp = requests.get(deezer_url, timeout=5)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    tracks = data.get("data", [])
+                    if tracks:
+                        first = tracks[0]
+                        track_title = f"{first.get('title', query)} - {first.get('artist', {}).get('name', '')}".strip(" -")
+                        clean_search = track_title
             except Exception:
                 pass
 
-        loop = asyncio.get_running_loop()
+            try:
+                from downloaders.youtube import download as yt_download
+                dl_path = yt_download(clean_search, format="mp3")
+                return dl_path, track_title
+            except Exception as e:
+                print(f"[Wynk fallback yttowav failed: {e}]")
 
-        def _fallback_dl():
             safe_name = re.sub(r'[^a-zA-Z0-9]', '_', query)[:20]
             out_file = os.path.join(self._download_dir, f"wynk_{safe_name}.mp3")
             opts = {
@@ -171,12 +163,11 @@ class OptimizedWynkEngine:
                 dl_path = ydl.prepare_filename(entry)
                 return dl_path, entry.get("title", query)
 
-        return await loop.run_in_executor(None, _fallback_dl)
+        return await loop.run_in_executor(None, _fetch_and_download)
 
     async def process_batch(
         self, queries: List[str]
     ) -> List[Dict[str, Any]]:
-        """Macro-optimized pipeline running parallel search and streaming downloads."""
         connector = aiohttp.TCPConnector(
             limit=100, ttl_dns_cache=300, enable_cleanup_closed=True
         )

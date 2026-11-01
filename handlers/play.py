@@ -40,7 +40,6 @@ from pyrogram.types import (
 )
 from pyrogram.errors import UserAlreadyParticipant
 from youtube_search import YoutubeSearch
-from yt_dlp import YoutubeDL
 
 import converter
 from downloaders import youtube
@@ -388,6 +387,17 @@ async def play(client: Client, message: Message):
             duration = results[0].get("duration", "N/A")
             views = results[0].get("views", "N/A")
 
+            dur_sec = 0
+            if duration and duration != "N/A":
+                dur_parts = [int(x) for x in duration.split(":") if x.isdigit()]
+                if len(dur_parts) == 2:
+                    dur_sec = dur_parts[0] * 60 + dur_parts[1]
+                elif len(dur_parts) == 3:
+                    dur_sec = dur_parts[0] * 3600 + dur_parts[1] * 60 + dur_parts[2]
+            if dur_sec and round(dur_sec / 60) > DURATION_LIMIT:
+                await lel.edit(f"❌ Videos longer than {DURATION_LIMIT} minute(s) aren't allowed. The provided video is {round(dur_sec / 60)} minute(s).")
+                return
+
             await lel.edit("⬇️ **Downloading and converting...**")
             downloaded_raw = youtube.download(url)
             file_path = await converter.convert(downloaded_raw)
@@ -476,24 +486,10 @@ async def deezer_play(client: Client, message: Message):
         track = tracks[0]
         title = track.get("title", query)
         artist = track.get("artist", {}).get("name", "Unknown Artist")
-        preview = track.get("preview")
 
-        await lel.edit(f"⬇️ **Downloading `{title}`...**")
-        file_path = None
-        if preview:
-            temp_mp3 = f"downloads/deez_{uuid.uuid4().hex[:8]}.mp3"
-            os.makedirs("downloads", exist_ok=True)
-            async with aiohttp.ClientSession() as session:
-                async with session.get(preview) as resp:
-                    if resp.status == 200:
-                        async with aiofiles.open(temp_mp3, mode='wb') as f:
-                            await f.write(await resp.read())
-            file_path = await converter.convert(temp_mp3)
-        else:
-            results = YoutubeSearch(f"{title} {artist}", max_results=1).to_dict()
-            if results:
-                url = f"https://youtube.com{results[0]['url_suffix']}"
-                file_path = await converter.convert(youtube.download(url))
+        await lel.edit(f"⬇️ **Downloading full song `{title}`...**")
+        raw_download = youtube.download(f"{title} {artist}", format="wav")
+        file_path = await converter.convert(raw_download)
 
         if not file_path:
             await lel.edit("❌ Could not download track audio.")
